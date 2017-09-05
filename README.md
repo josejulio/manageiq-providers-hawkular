@@ -270,12 +270,12 @@ and configured.
 
 #### Via Docker (recommended)
 
-First, we need to install [hawkinit](https://github.com/Jiri-Kremser/hawkinit),
+First, we need to install [hawkinit](https://github.com/hawkular/hawkinit),
 a CLI tool that takes care of running a Hawkular cluster for you. You can do
 that by getting it through npm, like this:
 
 ```bash
-sudo npm install -g hawkinit
+sudo npm install @hawkular/hawkinit -g
 ```
 
 You'll also need to have Docker installed, and your group should be on the
@@ -286,23 +286,24 @@ sudo usermod -a -G docker `whoami`
 newgrp docker # to update your groups on the session
 ```
 
-Then, by running `hawkinit`, you'll see something like this:
-
-![](screenshots/hawkinit.png)
-
-It will ask then some questions:
-
-* What should it use for running the services? Docker-Compose? Openshift?
-* What version of Hawkular?
-* What version of Cassandra?
-* What WildFly version?
-* Standalone or Domain mode for Wildfly?
-* How many WildFly servers?
+Then, run `hawkinit`.
 
 For most options, the default is ok, and is the fastest way to have something
 running. One important thing is that when you run hawkinit again, it will not
 reuse the same images, but use new ones. If that's not the behaviour you want,
 you can find the generated `docker-compose.yml` on `/tmp`.
+
+We have preppared some basic scenarios that will get you started:
+- [Hawkular Services and one mutable agent](readme_data/hawkinit/mutable-agent.json)
+- [Hawkular Services and one immutable agent](readme_data/hawkinit/immutable-agent.json)
+
+You can run them like this:
+```bash
+hawkinit -a readme_data/hawkinit/mutable-agent.json
+```
+
+You can find more information
+on [hawkinit](https://github.com/hawkular/hawkinit).
 
 #### Manually
 
